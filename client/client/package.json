@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "unicode-grid-client": "file:.."
+  }
+}

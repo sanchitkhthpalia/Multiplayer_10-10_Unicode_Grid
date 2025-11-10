@@ -92,4 +92,4 @@ client/
 
 ## AI Assistance Disclosure
 
-Parts of this project were scaffolded and implemented with the assistance of an AI coding assistant (Cascade). All code has been reviewed for clarity and correctness.
+Parts of this project were scaffolded and implemented with the assistance of an AI coding assistant (Windsurf). All code has been reviewed for clarity and correctness.

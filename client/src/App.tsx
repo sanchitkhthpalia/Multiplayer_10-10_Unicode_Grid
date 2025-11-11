@@ -51,9 +51,9 @@ export default function App() {
       });
       setPlayerCount(playerCount);
     });
-    return () => {
-      socket.disconnect();
-    };
+    // return () => {
+    //   socket.disconnect();
+    // };
   }, [socket]);
 
   async function submit() {

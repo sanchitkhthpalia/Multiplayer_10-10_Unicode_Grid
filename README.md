@@ -94,7 +94,3 @@ client/
 ## AI Assistance Disclosure
 
 Parts of this project were scaffolded and implemented with the assistance of an AI coding assistant (Windsurf). All code has been reviewed for clarity and correctness.
-
-## AI Tools Disclosure
-
-This project was partially built with the assistance of AI tools, including ChatGPT (for code explanations and documentation) and GitHub Copilot (for boilerplate suggestions). All final logic and architecture were reviewed and refined manually.

@@ -3,10 +3,9 @@ import Grid from './components/Grid';
 import PlayerCount from './components/PlayerCount';
 import History from './components/History';
 import { fetchGrid } from './services/api';
-import { createSocket } from './services/socket';
+import { socket } from './services/socket';
 
 export default function App() {
-  const socket = useMemo(() => createSocket(), []);
   const [grid, setGrid] = useState<string[][]>(Array.from({ length: 10 }, () => Array.from({ length: 10 }, () => '')));
   const [playerCount, setPlayerCount] = useState(0);
   const [connected, setConnected] = useState(false);
@@ -69,12 +68,19 @@ export default function App() {
       return;
     }
     if (!connected) {
-      setError('Not connected to server');
+      const msg = 'Not connected to server';
+      setError(msg);
+      window.alert(msg);
       return;
     }
     socket.emit('submit', { row: selected.row, col: selected.col, char }, (resp: { ok: boolean; error?: string }) => {
-      if (!resp.ok) setError(resp.error || 'Submit failed');
-      else setInput('');
+      if (!resp.ok) {
+        const msg = resp.error || 'Submit failed';
+        setError(msg);
+        window.alert(msg);
+      } else {
+        setInput('');
+      }
     });
   }
 
@@ -100,7 +106,7 @@ export default function App() {
               placeholder="Enter a character"
               maxLength={4}
             />
-            <button className="button primary" onClick={submit} disabled={!connected}>Submit</button>
+            <button className="button primary" onClick={submit}>Submit</button>
           </div>
           {error && <div className="error">{error}</div>}
         </div>

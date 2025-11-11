@@ -37,7 +37,7 @@ Environment variables (optional):
 
 - `PORT` (default `3001`)
 - `CORS_ORIGIN` (default `*`)
-- `TIMED_RESTRICTION_ENABLED` (`true`|`false`, default `true`)
+- `TIMED_RESTRICTION_ENABLED` (`true`|`false`, default `false`) — By default, players can submit only once per session. Set to `true` to enable a 60s cooldown allowing repeated submissions.
 - `COOLDOWN_MS` (default `60000`)
 - `HISTORY_MODE_ENABLED` (`true`|`false`, default `true`)
 
@@ -89,7 +89,12 @@ client/
 - Global state (grid, players, history) is kept in memory for simplicity. Swapping to Redis would involve replacing `state.ts` accesses.
 - If `TIMED_RESTRICTION_ENABLED=false`, each player can submit only once for the entire session.
 - If `HISTORY_MODE_ENABLED=false`, `/history` returns `{ enabled: false, history: [] }`.
+- **Setup Note**: By default, players can submit only once per session. To enable repeated submissions with a cooldown, set `TIMED_RESTRICTION_ENABLED=true` in your server environment variables.
 
 ## AI Assistance Disclosure
 
 Parts of this project were scaffolded and implemented with the assistance of an AI coding assistant (Windsurf). All code has been reviewed for clarity and correctness.
+
+## AI Tools Disclosure
+
+This project was partially built with the assistance of AI tools, including ChatGPT (for code explanations and documentation) and GitHub Copilot (for boilerplate suggestions). All final logic and architecture were reviewed and refined manually.

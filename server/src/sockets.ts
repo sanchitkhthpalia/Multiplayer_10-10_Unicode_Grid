@@ -24,6 +24,9 @@ export function setupSockets(io: Server) {
       ack?.(players.size);
     });
 
+    // Submission rules:
+    // - Default (TIMED_RESTRICTION_ENABLED=false): a player may submit only once for the entire session.
+    // - If TIMED_RESTRICTION_ENABLED=true: allow repeated submissions but enforce a cooldown.
     socket.on('submit', (payload: { row: number; col: number; char: string }, ack?: (resp: { ok: boolean; error?: string }) => void) => {
       const { row, col } = payload ?? {} as any;
       let { char } = payload ?? {} as any;
@@ -53,8 +56,9 @@ export function setupSockets(io: Server) {
       const now = Date.now();
 
       if (!TIMED_RESTRICTION_ENABLED) {
+        // Permanent one-time submission per session
         if (player.lastSubmit !== null) {
-          ack?.({ ok: false, error: 'You have already submitted once' });
+          ack?.({ ok: false, error: 'You have already submitted once in this session.' });
           return;
         }
       } else {

@@ -12,19 +12,18 @@ export type ClientToServerEvents = {
   get_player_count: (ack?: (n: number) => void) => void;
 };
 
-export function createSocket(): Socket<ServerToClientEvents, ClientToServerEvents> {
-  // Debug: show which URL we are connecting to
-  // eslint-disable-next-line no-console
-  console.log('[socket] creating client', { url });
-  const socket = io(url, {
-    transports: ['polling'],
-    autoConnect: true,
-    reconnection: true,
-    path: '/socket.io',
-  });
-  // Debug hooks
-  socket.on('connect', () => console.log('[socket] connect', socket.id));
-  socket.on('connect_error', (e) => console.error('[socket] connect_error', e));
-  socket.on('disconnect', (r) => console.warn('[socket] disconnect', r));
-  return socket as Socket<ServerToClientEvents, ClientToServerEvents>;
-}
+// Debug: show which URL we are connecting to
+// eslint-disable-next-line no-console
+console.log('[socket] creating client', { url });
+
+export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(url, {
+  transports: ['polling'],
+  autoConnect: true,
+  reconnection: true,
+  path: '/socket.io',
+});
+
+// Debug hooks
+socket.on('connect', () => console.log('[socket] connect', socket.id));
+socket.on('connect_error', (e) => console.error('[socket] connect_error', e));
+socket.on('disconnect', (r) => console.warn('[socket] disconnect', r));
